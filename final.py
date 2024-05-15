@@ -1,30 +1,6 @@
 import json
-with open("allcodes.json", "r") as f:
+with open("merged_data.json", "r") as f:
   data = json.load(f)
-def preprocess_documentation(doc_dict):
-  """
-  Preprocesses a documentation dictionary into a single string with formatted key-value pairs.
-
-  Args:
-      doc_dict: A dictionary containing program information.
-
-  Returns:
-      A string representing the preprocessed documentation.
-  """
-  doc_string = "\n".join([f"{key.title().replace('_', ' ')}: {value}" for key, value in doc_dict.items()])
-  return doc_string
-for item in data:
-  item["documentation"] = preprocess_documentation(item["documentation"])
-
-# Print the preprocessed data
-print(json.dumps(data, indent=2))
-for item in data:
-  item["documentation"] = item["documentation"].replace("\n", ". ")
-with open("preprocessed_cobol_data.json", "w") as f:
-  json.dump(data, f, indent=2)
-
-print("Preprocessed data saved to preprocessed_cobol_data.json")
-
 # Install Libraries (if not already installed)
 
 from transformers import T5ForConditionalGeneration, T5Tokenizer
